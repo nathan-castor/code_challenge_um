@@ -63,6 +63,12 @@ perc_commuters
 132304/1863780
 ```
 ```{r}
+commRate = data.frame(County = tgt_counties, Rate = perc_commuters)
+commRate
+```
+
+
+```{r}
 heart_attack <- read_csv("heartAttackER_2012_16.csv")
 heart_attack
 ```
@@ -90,5 +96,10 @@ names(heart_attack_tgts_mean)
 ```{r}
 perc_heart_attacks = t(t(commute_time_tgts[,"Value"]) / as.vector(unlist(tot_pop_tgts[1,])))
 perc_heart_attacks
+```
+
+```{r}
+hospRate = data.frame(County = tgt_counties, Rate = perc_heart_attacks)
+hospRate
 ```
 
