@@ -37,4 +37,14 @@ head(tot_pop_tgts)
 perc_pop_15up_tgts = perc_pop_15up %>% select(tgt_county_totals)
 head(perc_pop_15up_tgts)
 ```
+```{r}
+for (i in colnames(perc_pop_15up_tgts)){
+   # print(perc_pop_15up_tgts[[i]])
+  perc_pop_15up_tgts[[i]]<-as.numeric(gsub("\\%","",perc_pop_15up_tgts[[i]]/100))
+}
+head(perc_pop_15up_tgts)
+```
+```{r}
+
+```
 

@@ -1871,10 +1871,28 @@ head(perc_pop_15up_tgts)</code></pre>
 </div>
 <!-- rnb-frame-end -->
 <!-- rnb-chunk-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZm9yIChpIGluIGNvbG5hbWVzKHBlcmNfcG9wXzE1dXBfdGd0cykpe1xuICAgIyBwcmludChwZXJjX3BvcF8xNXVwX3RndHNbW2ldXSlcbiAgcGVyY19wb3BfMTV1cF90Z3RzW1tpXV08LWFzLm51bWVyaWMoZ3N1YihcIlxcXFwlXCIsXCJcIixwZXJjX3BvcF8xNXVwX3RndHNbW2ldXS8xMDApKVxufVxuaGVhZChwZXJjX3BvcF8xNXVwX3RndHMpXG5gYGAifQ== -->
+<pre class="r"><code>for (i in colnames(perc_pop_15up_tgts)){
+   # print(perc_pop_15up_tgts[[i]])
+  perc_pop_15up_tgts[[i]]&lt;-as.numeric(gsub(&quot;\\%&quot;,&quot;&quot;,perc_pop_15up_tgts[[i]]/100))
+}
+head(perc_pop_15up_tgts)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6NiwibmNvbCI6NH0sInJkZiI6Ikg0c0lBQUFBQUFBQUF3dHlpVERtaXVCaVlHQmdabUJoWUdKZ1pnVXlHVmhEUTl4MExSZ1lXSmlBSEVhZ0JDZUlyZ0FxRWdZeVdJQ1lENGpaN05lWjJ0ZThuWmhodjNIbDcrYzUzUzcybXpZb0hKbTk5REdjanlZTzE3ZmVPaVZLWmcySC9mcDlaU2UyV0ViWWIxUjdXWEhsN3hjNHZXSHhkUzdiZ2lYMkcxKzN5dTBJZkFQWHQxWmZhdjYrc3BOd0dtWS9odmlPUUpCT3VMNWxMQktUUy9aazJhL1IrSHFvUDBZVGJpK01EMVdQc0EvRjQ2eDVpYm1weFVDR0FOanpFRUZ0Mzh6RTNFeGRsOFNVVkFYbi9OSzhra29kQmJlYy9LTE1sRVJGeFpEOGtzUWNSVVhYNHBMTTNNU1NWS2dXRGFlaS9QTEVvaFJpMVdzSEpPYmtLamlsSmlabkVLdEYzVGMvcnlpZkNCZWgrcEFUNkRBOW1DOTVnWmlwQVVqOC8vLy9GM3BRSk9ja0ZzT0NBaWJJbFpKWWtxaVhWZ1RVRCtUOVE5UENubDlRa3BtZkI5VEVCRW84ckdpYUdZdlFCUGhMODBBdVNkRk56aWpOeTlZMUExa0Fsb1lBWGlpYkRZbk5BckdTNlQvVUtGYW9VV3lwZWVtWmViQ3dZYzFKVEVyTmdYTDRnRDRHZTFpdm9DZ3pyd1RtRTZCb3NWNEpLS3hnSXNuNU9UQVJzTjhZL2dFQWtoUkZ3VE1EQUFBPSJ9 -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Miami-Dade County, Florida!!Total!!Estimate"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Broward County, Florida!!Total!!Estimate"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Palm Beach County, Florida!!Total!!Estimate"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Monroe County, Florida!!Total!!Estimate"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"0.059","2":"0.061","3":"0.057","4":"0.043"},{"1":"0.069","2":"0.062","3":"0.057","4":"0.055"},{"1":"0.073","2":"0.067","3":"0.059","4":"0.062"},{"1":"0.069","2":"0.067","3":"0.057","4":"0.055"},{"1":"0.069","2":"0.065","3":"0.057","4":"0.060"},{"1":"0.073","2":"0.070","3":"0.060","4":"0.070"}],"options":{"columns":{"min":{},"max":[10],"total":[4]},"rows":{"min":[10],"max":[10],"total":[6]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKYGBge3J9CiMgaW5zdGFsbCBsaWJyYXJpZXMKbGlicmFyeSh0aWR5dmVyc2UpCmBgYApgYGB7cn0KdG90X3BvcF9kZiA9IHJlYWRfY3N2KCI1WTIwMTZfUzAxMDEuY3N2Iiwgbl9tYXggPSAxKQpoZWFkKHRvdF9wb3BfZGYpCmBgYApgYGB7cn0KIyBjb2xfbmFtZXMgPSBhcy52ZWN0b3IoY29sbmFtZXModG90X3BvcF9kZikpCiMgY2xhc3MoY29sX25hbWVzKQojIGNvbF9uYW1lcwpgYGAKCgpgYGB7cn0KZGZfbmFtZXMgPC0gcmVhZF9jc3YoIjVZMjAxNl9TMDEwMS5jc3YiLCBuX21heCA9IDApICU+JSBuYW1lcygpCmRmX25hbWVzCmBgYApgYGB7cn0KcGVyY19wb3BfMTV1cCA9IHJlYWRfY3N2KCI1WTIwMTZfUzAxMDEuY3N2IiwgY29sX25hbWVzID0gZGZfbmFtZXMsIHNraXAgPSA2LCBuX21heCA9IDE1KQpoZWFkKHBlcmNfcG9wXzE1dXApCmBgYApgYGB7cn0KdGd0X2NvdW50eV90b3RhbHMgPSBjKCJNaWFtaS1EYWRlIENvdW50eSwgRmxvcmlkYSEhVG90YWwhIUVzdGltYXRlIiwgIkJyb3dhcmQgQ291bnR5LCBGbG9yaWRhISFUb3RhbCEhRXN0aW1hdGUiLCAiUGFsbSBCZWFjaCBDb3VudHksIEZsb3JpZGEhIVRvdGFsISFFc3RpbWF0ZSIsICJNb25yb2UgQ291bnR5LCBGbG9yaWRhISFUb3RhbCEhRXN0aW1hdGUiKQpgYGAKYGBge3J9CnRvdF9wb3BfdGd0cyA9IHRvdF9wb3BfZGYgJT4lIHNlbGVjdCh0Z3RfY291bnR5X3RvdGFscykKaGVhZCh0b3RfcG9wX3RndHMpCmBgYApgYGB7cn0KcGVyY19wb3BfMTV1cF90Z3RzID0gcGVyY19wb3BfMTV1cCAlPiUgc2VsZWN0KHRndF9jb3VudHlfdG90YWxzKQpoZWFkKHBlcmNfcG9wXzE1dXBfdGd0cykKYGBgCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKYGBge3J9CiMgaW5zdGFsbCBsaWJyYXJpZXMKbGlicmFyeSh0aWR5dmVyc2UpCmBgYApgYGB7cn0KdG90X3BvcF9kZiA9IHJlYWRfY3N2KCI1WTIwMTZfUzAxMDEuY3N2Iiwgbl9tYXggPSAxKQpoZWFkKHRvdF9wb3BfZGYpCmBgYApgYGB7cn0KIyBjb2xfbmFtZXMgPSBhcy52ZWN0b3IoY29sbmFtZXModG90X3BvcF9kZikpCiMgY2xhc3MoY29sX25hbWVzKQojIGNvbF9uYW1lcwpgYGAKCgpgYGB7cn0KZGZfbmFtZXMgPC0gcmVhZF9jc3YoIjVZMjAxNl9TMDEwMS5jc3YiLCBuX21heCA9IDApICU+JSBuYW1lcygpCmRmX25hbWVzCmBgYApgYGB7cn0KcGVyY19wb3BfMTV1cCA9IHJlYWRfY3N2KCI1WTIwMTZfUzAxMDEuY3N2IiwgY29sX25hbWVzID0gZGZfbmFtZXMsIHNraXAgPSA2LCBuX21heCA9IDE1KQpoZWFkKHBlcmNfcG9wXzE1dXApCmBgYApgYGB7cn0KdGd0X2NvdW50eV90b3RhbHMgPSBjKCJNaWFtaS1EYWRlIENvdW50eSwgRmxvcmlkYSEhVG90YWwhIUVzdGltYXRlIiwgIkJyb3dhcmQgQ291bnR5LCBGbG9yaWRhISFUb3RhbCEhRXN0aW1hdGUiLCAiUGFsbSBCZWFjaCBDb3VudHksIEZsb3JpZGEhIVRvdGFsISFFc3RpbWF0ZSIsICJNb25yb2UgQ291bnR5LCBGbG9yaWRhISFUb3RhbCEhRXN0aW1hdGUiKQpgYGAKYGBge3J9CnRvdF9wb3BfdGd0cyA9IHRvdF9wb3BfZGYgJT4lIHNlbGVjdCh0Z3RfY291bnR5X3RvdGFscykKaGVhZCh0b3RfcG9wX3RndHMpCmBgYApgYGB7cn0KcGVyY19wb3BfMTV1cF90Z3RzID0gcGVyY19wb3BfMTV1cCAlPiUgc2VsZWN0KHRndF9jb3VudHlfdG90YWxzKQpoZWFkKHBlcmNfcG9wXzE1dXBfdGd0cykKYGBgCmBgYHtyfQpmb3IgKGkgaW4gY29sbmFtZXMocGVyY19wb3BfMTV1cF90Z3RzKSl7CiAgICMgcHJpbnQocGVyY19wb3BfMTV1cF90Z3RzW1tpXV0pCiAgcGVyY19wb3BfMTV1cF90Z3RzW1tpXV08LWFzLm51bWVyaWMoZ3N1YigiXFwlIiwiIixwZXJjX3BvcF8xNXVwX3RndHNbW2ldXS8xMDApKQp9CmhlYWQocGVyY19wb3BfMTV1cF90Z3RzKQpgYGAKYGBge3J9CgpgYGAKCg==</div>
 
 
 
