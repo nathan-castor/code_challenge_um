@@ -45,6 +45,20 @@ for (i in colnames(perc_pop_15up_tgts)){
 head(perc_pop_15up_tgts)
 ```
 ```{r}
-
+# get sum of percents
+# sum_perc_tgts = perc_pop_15up_tgts %>% 
+summed_perc_tgts = data.frame(colSums(perc_pop_15up_tgts, na.rm = TRUE))
+summed_perc_tgts
+```
+```{r}
+summed_perc_tgts_v = colSums(perc_pop_15up_tgts, na.rm = TRUE)
+summed_perc_tgts_v
+```
+```{r}
+data.frame(mapply(`*`,tot_pop_tgts,summed_perc_tgts_v))
+```
+```{r}
+# sanity check
+tot_pop_tgts[,1] * summed_perc_tgts_v[1]
 ```
 

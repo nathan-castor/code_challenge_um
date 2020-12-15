@@ -1888,11 +1888,60 @@ head(perc_pop_15up_tgts)</code></pre>
 <!-- rnb-frame-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBnZXQgc3VtIG9mIHBlcmNlbnRzXG4jIHN1bV9wZXJjX3RndHMgPSBwZXJjX3BvcF8xNXVwX3RndHMgJT4lIFxuc3VtbWVkX3BlcmNfdGd0cyA9IGRhdGEuZnJhbWUoY29sU3VtcyhwZXJjX3BvcF8xNXVwX3RndHMsIG5hLnJtID0gVFJVRSkpXG5zdW1tZWRfcGVyY190Z3RzXG5gYGAifQ== -->
+<pre class="r"><code># get sum of percents
+# sum_perc_tgts = perc_pop_15up_tgts %&gt;% 
+summed_perc_tgts = data.frame(colSums(perc_pop_15up_tgts, na.rm = TRUE))
+summed_perc_tgts</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6NCwibmNvbCI6MX0sInJkZiI6Ikg0c0lBQUFBQUFBQUE0MVNNVXNETVJST3IzZEtDNWFDSUk2OVNhVmVzSWdvT0J6V3RsdFJhaXZkYXJ5TE5aaExqbHdPOVJlSWc1T0R2OGEvSUs1T1RpNzFCN2hWY3pVSEpWT0hrUGUrNVB0ZTN2ZlNhdzEzeThNeUFLQUliR0NCb3FOQzRBejZIZThBQU50U1NVRWRsTEw5VGwxYW5RRUFWTlN5L2NuTDA4bm5ZZWhQenUzMVovbnFUOTYvTG80ZTkvM3ZuN2VQdFllNkllQXdGT0ZFQmRVNWNDdmc5Q3lORWhoakVZeGlIbzhhZTJrOGttT1pRTWdRRkJHRXNOOGJ0S0doVmhMOEZzNHIydnFnM2lVb0lsNExoYmgyekZNbTc3ZHJIY29GQ1pIcjlybEUxSFhiaVNRUmtsaFROcHRLRElsdzBmdjFVMFNqV2hPajRIcFJ5a2FYTThFWGVKSGhXVUJSWW5wV0RwRkU4RXFvNWxVMk5TakxQSmFFTTBXeXNtazVCcmtnREtDYXNzekcwQXV1VTNiak5YYXlDbnJNMlZyUnV6MFhGLzVyV3I5YXk5RmFTNWlOQ2N0N2RpaTZ4RlFuRldYeGJGd3dGb1RKdkJXRkpsQm1IdVNJK2hBNU1tc09UUDhBTVZwRDJhVUNBQUE9In0= -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["colSums.perc_pop_15up_tgts..na.rm...TRUE."],"name":[1],"type":["dbl"],"align":["right"]}],"data":[{"1":"0.831","_rn_":"Miami-Dade County, Florida!!Total!!Estimate"},{"1":"0.823","_rn_":"Broward County, Florida!!Total!!Estimate"},{"1":"0.838","_rn_":"Palm Beach County, Florida!!Total!!Estimate"},{"1":"0.874","_rn_":"Monroe County, Florida!!Total!!Estimate"}],"options":{"columns":{"min":{},"max":[10],"total":[1]},"rows":{"min":[10],"max":[10],"total":[4]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtbWVkX3BlcmNfdGd0c192ID0gY29sU3VtcyhwZXJjX3BvcF8xNXVwX3RndHMsIG5hLnJtID0gVFJVRSlcbnN1bW1lZF9wZXJjX3RndHNfdlxuYGBgIn0= -->
+<pre class="r"><code>summed_perc_tgts_v = colSums(perc_pop_15up_tgts, na.rm = TRUE)
+summed_perc_tgts_v</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTWlhbWktRGFkZSBDb3VudHksIEZsb3JpZGEhIVRvdGFsISFFc3RpbWF0ZSAgICBCcm93YXJkIENvdW50eSwgRmxvcmlkYSEhVG90YWwhIUVzdGltYXRlIFBhbG0gQmVhY2ggQ291bnR5LCBGbG9yaWRhISFUb3RhbCEhRXN0aW1hdGUgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDAuODMxICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgMC44MjMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAwLjgzOCBcbiAgICBNb25yb2UgQ291bnR5LCBGbG9yaWRhISFUb3RhbCEhRXN0aW1hdGUgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDAuODc0IFxuIn0= -->
+<pre><code>Miami-Dade County, Florida!!Total!!Estimate    Broward County, Florida!!Total!!Estimate Palm Beach County, Florida!!Total!!Estimate 
+                                      0.831                                       0.823                                       0.838 
+    Monroe County, Florida!!Total!!Estimate 
+                                      0.874 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGF0YS5mcmFtZShtYXBwbHkoYCpgLHRvdF9wb3BfdGd0cyxzdW1tZWRfcGVyY190Z3RzX3YpKVxuYGBgIn0= -->
+<pre class="r"><code>data.frame(mapply(`*`,tot_pop_tgts,summed_perc_tgts_v))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6NCwibmNvbCI6MX0sInJkZiI6Ikg0c0lBQUFBQUFBQUE0MVJ6VXJEUUJEZXBvblNpS1hnQ3pRbmhacEE5YURIVm10dkJaVUt2VWdZazdVTjdrL1liS3A5bEhyMUpuanhBVHo0Q0Y2OGl3OVFYNkM2aVJzb09YVmhtWmx2NXZ0MlorYXlOenEwUnpaQ3FJcE1aS0NxcFZ4a1hRMzc3akZDcHFHQ2lrclVNdnVnaW5aeUFLRzZ1bWEzOHoxNytmaDU3aDZOM3hkUG4xdmQ5dGZiOWF0Yjd5eW1GL1A1L0xFa1lER2dPRkZPWXdWMEtjUXhtWG41a1Z6Nk1ZOTlPWmFKNXlVcHBUajBZeXlDSFBHblhrbXhKdmk5dDZwcTZrUnJFQUdOM0I2RXVIbktVeVpuKzgwKzRTSUt3WEdHWEFKeG5MTkVSaFFrMXBTOUV5VUdJbHkzdm5VT2hEWlBNQVNUZFNtN0E4NEVYK05IcGJrRkJKTHkzT3dRSkhpM1FqV3ZvbVdKc3NsakdYR21TRWEyTWF0RXJvZ1MwRWhaTnNiUURTWXB1M1BiQjlrTGV0WFozZGJXWFBFci8yOGF2MXJMMGxvYm1JMGpWdlJzRWJqQlJBZDFOZUo4WFY0c0lpYUxWaFNhWkx1SG9zNE9PQ21RdkRtMC9BUG90TFNwcVFJQUFBPT0ifQ== -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["mapply......tot_pop_tgts..summed_perc_tgts_v."],"name":[1],"type":["dbl"],"align":["right"]}],"data":[{"1":"2214131.4","_rn_":"Miami-Dade County, Florida!!Total!!Estimate"},{"1":"1533890.9","_rn_":"Broward County, Florida!!Total!!Estimate"},{"1":"1172158.4","_rn_":"Palm Beach County, Florida!!Total!!Estimate"},{"1":"67429.1","_rn_":"Monroe County, Florida!!Total!!Estimate"}],"options":{"columns":{"min":{},"max":[10],"total":[1]},"rows":{"min":[10],"max":[10],"total":[4]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudG90X3BvcF90Z3RzWywxXSAqIHN1bW1lZF9wZXJjX3RndHNfdlsxXVxuYGBgIn0= -->
+<pre class="r"><code>tot_pop_tgts[,1] * summed_perc_tgts_v[1]</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MSwibmNvbCI6MX0sInJkZiI6Ikg0c0lBQUFBQUFBQUExMVF3VW9ETVJDZDNUYVZMbGdLL2tEM3JMc2dnbmhVckwzMUloVjZIWGVqaG1hVGtzMmkvU1hCbi9FYi9BRi9vTzFrU1VCem1wbVhlVy9leStOOGZaV3RNd0FZd0JCU0dEQnFnVDJ0RnNVTndEQ2xJYUdIc2FzZnRIVFdBd0FUVis5dWYzWmYzNytmMFNKVDJQQ1dtdWtmOEh3cHNCSEZIR3MrdTllZHNydUwyVUpxSTJyTTg1VzJLUFA4b2JXaVFjc2p2YkhSNzJYUVBQVUdrdmhvSmJHTmoyWTFXaXhmREhGcDJrZVVFNzIxUWlzaXBTNFdpOGlKaVlCcHA1eUx1cWplT3JVcExxL2RCVzhIL2x1TGJhWUhyOFc4MW9pclY2RjRNQy94bVVzL1RDaHVuN2JjR3FGc2lFSm9XMXIzVVFHcHRBeElIdzcyUitCbHI2Zk9BUUFBIn0= -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Miami-Dade County, Florida!!Total!!Estimate"],"name":[1],"type":["dbl"],"align":["right"]}],"data":[{"1":"2214131"}],"options":{"columns":{"min":{},"max":[10],"total":[1]},"rows":{"min":[10],"max":[10],"total":[1]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKYGBge3J9CiMgaW5zdGFsbCBsaWJyYXJpZXMKbGlicmFyeSh0aWR5dmVyc2UpCmBgYApgYGB7cn0KdG90X3BvcF9kZiA9IHJlYWRfY3N2KCI1WTIwMTZfUzAxMDEuY3N2Iiwgbl9tYXggPSAxKQpoZWFkKHRvdF9wb3BfZGYpCmBgYApgYGB7cn0KIyBjb2xfbmFtZXMgPSBhcy52ZWN0b3IoY29sbmFtZXModG90X3BvcF9kZikpCiMgY2xhc3MoY29sX25hbWVzKQojIGNvbF9uYW1lcwpgYGAKCgpgYGB7cn0KZGZfbmFtZXMgPC0gcmVhZF9jc3YoIjVZMjAxNl9TMDEwMS5jc3YiLCBuX21heCA9IDApICU+JSBuYW1lcygpCmRmX25hbWVzCmBgYApgYGB7cn0KcGVyY19wb3BfMTV1cCA9IHJlYWRfY3N2KCI1WTIwMTZfUzAxMDEuY3N2IiwgY29sX25hbWVzID0gZGZfbmFtZXMsIHNraXAgPSA2LCBuX21heCA9IDE1KQpoZWFkKHBlcmNfcG9wXzE1dXApCmBgYApgYGB7cn0KdGd0X2NvdW50eV90b3RhbHMgPSBjKCJNaWFtaS1EYWRlIENvdW50eSwgRmxvcmlkYSEhVG90YWwhIUVzdGltYXRlIiwgIkJyb3dhcmQgQ291bnR5LCBGbG9yaWRhISFUb3RhbCEhRXN0aW1hdGUiLCAiUGFsbSBCZWFjaCBDb3VudHksIEZsb3JpZGEhIVRvdGFsISFFc3RpbWF0ZSIsICJNb25yb2UgQ291bnR5LCBGbG9yaWRhISFUb3RhbCEhRXN0aW1hdGUiKQpgYGAKYGBge3J9CnRvdF9wb3BfdGd0cyA9IHRvdF9wb3BfZGYgJT4lIHNlbGVjdCh0Z3RfY291bnR5X3RvdGFscykKaGVhZCh0b3RfcG9wX3RndHMpCmBgYApgYGB7cn0KcGVyY19wb3BfMTV1cF90Z3RzID0gcGVyY19wb3BfMTV1cCAlPiUgc2VsZWN0KHRndF9jb3VudHlfdG90YWxzKQpoZWFkKHBlcmNfcG9wXzE1dXBfdGd0cykKYGBgCmBgYHtyfQpmb3IgKGkgaW4gY29sbmFtZXMocGVyY19wb3BfMTV1cF90Z3RzKSl7CiAgICMgcHJpbnQocGVyY19wb3BfMTV1cF90Z3RzW1tpXV0pCiAgcGVyY19wb3BfMTV1cF90Z3RzW1tpXV08LWFzLm51bWVyaWMoZ3N1YigiXFwlIiwiIixwZXJjX3BvcF8xNXVwX3RndHNbW2ldXS8xMDApKQp9CmhlYWQocGVyY19wb3BfMTV1cF90Z3RzKQpgYGAKYGBge3J9CgpgYGAKCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKYGBge3J9CiMgaW5zdGFsbCBsaWJyYXJpZXMKbGlicmFyeSh0aWR5dmVyc2UpCmBgYApgYGB7cn0KdG90X3BvcF9kZiA9IHJlYWRfY3N2KCI1WTIwMTZfUzAxMDEuY3N2Iiwgbl9tYXggPSAxKQpoZWFkKHRvdF9wb3BfZGYpCmBgYApgYGB7cn0KIyBjb2xfbmFtZXMgPSBhcy52ZWN0b3IoY29sbmFtZXModG90X3BvcF9kZikpCiMgY2xhc3MoY29sX25hbWVzKQojIGNvbF9uYW1lcwpgYGAKCgpgYGB7cn0KZGZfbmFtZXMgPC0gcmVhZF9jc3YoIjVZMjAxNl9TMDEwMS5jc3YiLCBuX21heCA9IDApICU+JSBuYW1lcygpCmRmX25hbWVzCmBgYApgYGB7cn0KcGVyY19wb3BfMTV1cCA9IHJlYWRfY3N2KCI1WTIwMTZfUzAxMDEuY3N2IiwgY29sX25hbWVzID0gZGZfbmFtZXMsIHNraXAgPSA2LCBuX21heCA9IDE1KQpoZWFkKHBlcmNfcG9wXzE1dXApCmBgYApgYGB7cn0KdGd0X2NvdW50eV90b3RhbHMgPSBjKCJNaWFtaS1EYWRlIENvdW50eSwgRmxvcmlkYSEhVG90YWwhIUVzdGltYXRlIiwgIkJyb3dhcmQgQ291bnR5LCBGbG9yaWRhISFUb3RhbCEhRXN0aW1hdGUiLCAiUGFsbSBCZWFjaCBDb3VudHksIEZsb3JpZGEhIVRvdGFsISFFc3RpbWF0ZSIsICJNb25yb2UgQ291bnR5LCBGbG9yaWRhISFUb3RhbCEhRXN0aW1hdGUiKQpgYGAKYGBge3J9CnRvdF9wb3BfdGd0cyA9IHRvdF9wb3BfZGYgJT4lIHNlbGVjdCh0Z3RfY291bnR5X3RvdGFscykKaGVhZCh0b3RfcG9wX3RndHMpCmBgYApgYGB7cn0KcGVyY19wb3BfMTV1cF90Z3RzID0gcGVyY19wb3BfMTV1cCAlPiUgc2VsZWN0KHRndF9jb3VudHlfdG90YWxzKQpoZWFkKHBlcmNfcG9wXzE1dXBfdGd0cykKYGBgCmBgYHtyfQpmb3IgKGkgaW4gY29sbmFtZXMocGVyY19wb3BfMTV1cF90Z3RzKSl7CiAgICMgcHJpbnQocGVyY19wb3BfMTV1cF90Z3RzW1tpXV0pCiAgcGVyY19wb3BfMTV1cF90Z3RzW1tpXV08LWFzLm51bWVyaWMoZ3N1YigiXFwlIiwiIixwZXJjX3BvcF8xNXVwX3RndHNbW2ldXS8xMDApKQp9CmhlYWQocGVyY19wb3BfMTV1cF90Z3RzKQpgYGAKYGBge3J9CiMgZ2V0IHN1bSBvZiBwZXJjZW50cwojIHN1bV9wZXJjX3RndHMgPSBwZXJjX3BvcF8xNXVwX3RndHMgJT4lIApzdW1tZWRfcGVyY190Z3RzID0gZGF0YS5mcmFtZShjb2xTdW1zKHBlcmNfcG9wXzE1dXBfdGd0cywgbmEucm0gPSBUUlVFKSkKc3VtbWVkX3BlcmNfdGd0cwpgYGAKYGBge3J9CnN1bW1lZF9wZXJjX3RndHNfdiA9IGNvbFN1bXMocGVyY19wb3BfMTV1cF90Z3RzLCBuYS5ybSA9IFRSVUUpCnN1bW1lZF9wZXJjX3RndHNfdgpgYGAKYGBge3J9CmRhdGEuZnJhbWUobWFwcGx5KGAqYCx0b3RfcG9wX3RndHMsc3VtbWVkX3BlcmNfdGd0c192KSkKYGBgCmBgYHtyfQojIHNhbml0eSBjaGVjawp0b3RfcG9wX3RndHNbLDFdICogc3VtbWVkX3BlcmNfdGd0c192WzFdCmBgYAoK</div>
 
 
 
