@@ -8,19 +8,87 @@ output: html_notebook
 library(tidyverse)
 ```
 ```{r}
-tot_pop_df = read_csv("5Y2016_S0101.csv", n_max = 1)
+tot_pop_df <- read_csv("5Y2016_S0101.csv", n_max = 1)
 head(tot_pop_df)
 ```
 
 ```{r}
-tgt_county_totals = c("Miami-Dade County, Florida!!Total!!Estimate", "Broward County, Florida!!Total!!Estimate", "Palm Beach County, Florida!!Total!!Estimate", "Monroe County, Florida!!Total!!Estimate")
+tot_pop_edited <- tot_pop_df %>%
+  rename(
+    "Miami-Dade" = "Miami-Dade County, Florida!!Total!!Estimate",
+    "Broward" = "Broward County, Florida!!Total!!Estimate",
+    "Palm Beach" = "Palm Beach County, Florida!!Total!!Estimate",
+    "Monroe" = "Monroe County, Florida!!Total!!Estimate"
+  )
+tot_pop_edited
 ```
 ```{r}
-tot_pop_tgts = tot_pop_df %>% select(tgt_county_totals)
+tgt_counties <- c("Miami-Dade", "Broward", "Palm Beach", "Monroe")
+tot_pop_tgts <- tot_pop_edited %>% select(tgt_counties)
 head(tot_pop_tgts)
 ```
 
-```{r}
 
+```{r}
+commute_time <- read_csv("commuteTime45_2012_16.csv")
+commute_time
+```
+```{r}
+# commute_time_tgts = commute_time %>% select(tgt_counties)
+commute_time_tgts <- commute_time %>% filter(
+  County %in% tgt_counties
+)
+commute_time_tgts
+```
+
+
+```{r}
+#  NOT WORKING
+# tot_pop_tgts / commute_time_tgts$Value[match(names(tot_pop_tgts), commute_time_tgts$County)][col(tot_pop_tgts)]
+```
+
+
+```{r}
+tot_pop_tgts = tot_pop_tgts[ , order(names(tot_pop_tgts))]
+tot_pop_tgts
+```
+
+
+```{r}
+perc_commuters = t(t(commute_time_tgts[,"Value"]) / as.vector(unlist(tot_pop_tgts[1,])))
+perc_commuters
+```
+```{r}
+# Sanity Check
+132304/1863780
+```
+```{r}
+heart_attack <- read_csv("heartAttackER_2012_16.csv")
+heart_attack
+```
+```{r}
+heart_attack_tgts <- heart_attack %>% filter(
+  County %in% tgt_counties
+)
+heart_attack_tgts
+```
+```{r}
+heart_attack_tgts_mean <- heart_attack_tgts %>%
+  group_by(County) %>%
+  summarise(mean(Value))
+
+heart_attack_tgts_mean
+```
+```{r}
+# 
+heart_attack_tgts_mean <- heart_attack_tgts_mean %>%
+  rename(
+    "Value" = "mean(Value)")
+names(heart_attack_tgts_mean)
+```
+
+```{r}
+perc_heart_attacks = t(t(commute_time_tgts[,"Value"]) / as.vector(unlist(tot_pop_tgts[1,])))
+perc_heart_attacks
 ```
 
