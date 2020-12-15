@@ -1,0 +1,40 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+# install libraries
+library(tidyverse)
+```
+```{r}
+tot_pop_df = read_csv("5Y2016_S0101.csv", n_max = 1)
+head(tot_pop_df)
+```
+```{r}
+# col_names = as.vector(colnames(tot_pop_df))
+# class(col_names)
+# col_names
+```
+
+
+```{r}
+df_names <- read_csv("5Y2016_S0101.csv", n_max = 0) %>% names()
+df_names
+```
+```{r}
+perc_pop_15up = read_csv("5Y2016_S0101.csv", col_names = df_names, skip = 6, n_max = 15)
+head(perc_pop_15up)
+```
+```{r}
+tgt_county_totals = c("Miami-Dade County, Florida!!Total!!Estimate", "Broward County, Florida!!Total!!Estimate", "Palm Beach County, Florida!!Total!!Estimate", "Monroe County, Florida!!Total!!Estimate")
+```
+```{r}
+tot_pop_tgts = tot_pop_df %>% select(tgt_county_totals)
+head(tot_pop_tgts)
+```
+```{r}
+perc_pop_15up_tgts = perc_pop_15up %>% select(tgt_county_totals)
+head(perc_pop_15up_tgts)
+```
+
