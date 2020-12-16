@@ -104,8 +104,7 @@ names(heart_attack_tgts_mean)
 ```
 
 ```{r}
-# perc_heart_attacks <- t(t(commute_time_tgts[, "Value"]) / as.vector(unlist(tot_pop_tgts[1, ])))
-perc_heart_attacks <- calc_percent(commute_time_tgts)
+perc_heart_attacks <- calc_percent(heart_attack_tgts_mean)
 perc_heart_attacks
 ```
 
@@ -116,5 +115,36 @@ hospRate
 ```{r}
 rate_data = data.frame(County = hospRate[,1], hospRate = hospRate[,2], commRate = commRate[,2])
 rate_data
+```
+
+```{r}
+all_heart_attack_mean_5yr <- heart_attack %>%
+  group_by(County) %>%
+  summarise(mean(Value))
+
+all_heart_attack_mean_5yr <- all_heart_attack_mean_5yr %>%
+  rename(
+    "Value" = "mean(Value)"
+  )
+all_heart_attack_mean_5yr
+```
+
+```{r}
+all_commRate_hospRate <- merge(all_heart_attack_mean_5yr, commute_time, by="County")
+
+all_commRate_hospRate <- all_commRate_hospRate %>%
+  rename(
+    "num_hsptlzd" = "Value.x",
+    "num_commuters" = "Value.y"
+  )
+
+all_commRate_hospRate
+```
+
+
+```{r}
+ggplot(all_commRate_hospRate, aes(x = num_commuters, y = num_hsptlzd)) +
+  geom_point() 
+  # theme(legend.position = "bottom")
 ```
 
