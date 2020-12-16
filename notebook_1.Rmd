@@ -113,3 +113,8 @@ perc_heart_attacks
 hospRate <- data.frame(County = tgt_counties, Rate = perc_heart_attacks)
 hospRate
 ```
+```{r}
+rate_data = data.frame(County = hospRate[,1], hospRate = hospRate[,2], commRate = commRate[,2])
+rate_data
+```
+
