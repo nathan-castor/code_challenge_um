@@ -65,7 +65,7 @@ calc_percent <- function(df) {
 
 
 ```{r}
-# 
+#
 perc_commuters <- calc_percent(commute_time_tgts)
 perc_commuters
 ```
@@ -113,12 +113,12 @@ hospRate <- data.frame(County = tgt_counties, Rate = perc_heart_attacks)
 hospRate
 ```
 ```{r}
-rate_data = data.frame(County = hospRate[,1], hospRate = hospRate[,2], commRate = commRate[,2])
+rate_data <- data.frame(County = hospRate[, 1], hospRate = hospRate[, 2], commRate = commRate[, 2])
 rate_data
 ```
 
 ```{r}
-# 3.1 Get mean value hospRate for all FL counties 
+# 3.1 Get mean value hospRate for all FL counties
 all_heart_attack_mean_5yr <- heart_attack %>%
   group_by(County) %>%
   summarise(mean(Value))
@@ -131,7 +131,7 @@ all_heart_attack_mean_5yr
 ```
 
 ```{r}
-all_commRate_hospRate <- merge(all_heart_attack_mean_5yr, commute_time, by="County")
+all_commRate_hospRate <- merge(all_heart_attack_mean_5yr, commute_time, by = "County")
 
 all_commRate_hospRate <- all_commRate_hospRate %>%
   rename(
@@ -145,8 +145,8 @@ all_commRate_hospRate
 
 ```{r}
 ggplot(all_commRate_hospRate, aes(x = num_commuters, y = num_hsptlzd)) +
-  geom_point() 
-  # theme(legend.position = "bottom")
+  geom_point()
+# theme(legend.position = "bottom")
 ```
 
 ```{r}
@@ -154,14 +154,26 @@ ggplot(all_commRate_hospRate, aes(x = num_commuters, y = num_hsptlzd)) +
 ```
 ### From the scatter plot above we can infere that there is a positive correlation with the number of people who commute over 45 minutes and number of heart attack related hospitalizations.
 ```{r}
-# 4.1 
+# 4.1
 # Calculate the ratio of heart attack hospitalizations by number of people who commute 45+ minutes for all Florida counties
-hospRate_by_commRate = all_commRate_hospRate %>% group_by(County) %>% summarise(num_hsptlzd/num_commuters)
+hospRate_by_commRate <- all_commRate_hospRate %>%
+  group_by(County) %>%
+  summarise(num_hsptlzd / num_commuters)
 hospRate_by_commRate
 ```
 
 ```{r}
 # Sanity check
-
+# Alachua
+342.4 / 6408
 ```
 
+```{r}
+# Install libraries for mapping purposes
+library(tigris)
+library(leaflet)
+```
+
+```{r}
+
+```
