@@ -118,6 +118,7 @@ rate_data
 ```
 
 ```{r}
+# 3.1 Get mean value hospRate for all FL counties 
 all_heart_attack_mean_5yr <- heart_attack %>%
   group_by(County) %>%
   summarise(mean(Value))
@@ -152,3 +153,15 @@ ggplot(all_commRate_hospRate, aes(x = num_commuters, y = num_hsptlzd)) +
 # Number of People Who Commute 45+ Minutes vs. Hospitalization from Heart Attack
 ```
 ### From the scatter plot above we can infere that there is a positive correlation with the number of people who commute over 45 minutes and number of heart attack related hospitalizations.
+```{r}
+# 4.1 
+# Calculate the ratio of heart attack hospitalizations by number of people who commute 45+ minutes for all Florida counties
+hospRate_by_commRate = all_commRate_hospRate %>% group_by(County) %>% summarise(num_hsptlzd/num_commuters)
+hospRate_by_commRate
+```
+
+```{r}
+# Sanity check
+
+```
+
