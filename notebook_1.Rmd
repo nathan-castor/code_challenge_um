@@ -34,36 +34,47 @@ commute_time <- read_csv("commuteTime45_2012_16.csv")
 commute_time
 ```
 ```{r}
-# commute_time_tgts = commute_time %>% select(tgt_counties)
-commute_time_tgts <- commute_time %>% filter(
-  County %in% tgt_counties
-)
+#
+filter_tgt_counties <- function(df) {
+  return(df %>% filter(
+    County %in% tgt_counties
+  ))
+}
+```
+
+
+```{r}
+#
+commute_time_tgts <- filter_tgt_counties(commute_time)
 commute_time_tgts
 ```
 
 
 ```{r}
-#  NOT WORKING
-# tot_pop_tgts / commute_time_tgts$Value[match(names(tot_pop_tgts), commute_time_tgts$County)][col(tot_pop_tgts)]
-```
-
-
-```{r}
-tot_pop_tgts = tot_pop_tgts[ , order(names(tot_pop_tgts))]
+tot_pop_tgts <- tot_pop_tgts[, order(names(tot_pop_tgts))]
 tot_pop_tgts
 ```
 
 
 ```{r}
-perc_commuters = t(t(commute_time_tgts[,"Value"]) / as.vector(unlist(tot_pop_tgts[1,])))
+# Function to Calculate percent values
+calc_percent <- function(df) {
+  return(t(t(df[, "Value"]) / as.vector(unlist(tot_pop_tgts[1, ]))))
+}
+```
+
+
+```{r}
+# perc_commuters = t(t(commute_time_tgts[,"Value"]) / as.vector(unlist(tot_pop_tgts[1,])))
+perc_commuters <- calc_percent(commute_time_tgts)
 perc_commuters
 ```
 ```{r}
 # Sanity Check
-132304/1863780
+132304 / 1863780
 ```
 ```{r}
-commRate = data.frame(County = tgt_counties, Rate = perc_commuters)
+commRate <- data.frame(County = tgt_counties, Rate = perc_commuters)
 commRate
 ```
 
@@ -73,9 +84,7 @@ heart_attack <- read_csv("heartAttackER_2012_16.csv")
 heart_attack
 ```
 ```{r}
-heart_attack_tgts <- heart_attack %>% filter(
-  County %in% tgt_counties
-)
+heart_attack_tgts <- filter_tgt_counties(heart_attack)
 heart_attack_tgts
 ```
 ```{r}
@@ -86,20 +95,21 @@ heart_attack_tgts_mean <- heart_attack_tgts %>%
 heart_attack_tgts_mean
 ```
 ```{r}
-# 
+#
 heart_attack_tgts_mean <- heart_attack_tgts_mean %>%
   rename(
-    "Value" = "mean(Value)")
+    "Value" = "mean(Value)"
+  )
 names(heart_attack_tgts_mean)
 ```
 
 ```{r}
-perc_heart_attacks = t(t(commute_time_tgts[,"Value"]) / as.vector(unlist(tot_pop_tgts[1,])))
+# perc_heart_attacks <- t(t(commute_time_tgts[, "Value"]) / as.vector(unlist(tot_pop_tgts[1, ])))
+perc_heart_attacks <- calc_percent(commute_time_tgts)
 perc_heart_attacks
 ```
 
 ```{r}
-hospRate = data.frame(County = tgt_counties, Rate = perc_heart_attacks)
+hospRate <- data.frame(County = tgt_counties, Rate = perc_heart_attacks)
 hospRate
 ```
-
