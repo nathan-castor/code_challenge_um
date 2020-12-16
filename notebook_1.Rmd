@@ -65,7 +65,7 @@ calc_percent <- function(df) {
 
 
 ```{r}
-# perc_commuters = t(t(commute_time_tgts[,"Value"]) / as.vector(unlist(tot_pop_tgts[1,])))
+# 
 perc_commuters <- calc_percent(commute_time_tgts)
 perc_commuters
 ```
@@ -151,4 +151,4 @@ ggplot(all_commRate_hospRate, aes(x = num_commuters, y = num_hsptlzd)) +
 ```{r}
 # Number of People Who Commute 45+ Minutes vs. Hospitalization from Heart Attack
 ```
-
+### From the scatter plot above we can infere that there is a positive correlation with the number of people who commute over 45 minutes and number of heart attack related hospitalizations.
