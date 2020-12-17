@@ -27,6 +27,7 @@ tot_pop_edited <- tot_pop_df %>%
   )
 tot_pop_edited
 ```
+
 ```{r}
 tgt_counties <- c("Miami-Dade", "Broward", "Palm Beach", "Monroe")
 tot_pop_tgts <- tot_pop_edited %>% select(tgt_counties)
@@ -157,7 +158,7 @@ ggplot(all_commRate_hospRate, aes(x = num_commuters, y = num_hsptlzd)) +
 ```{r}
 # Number of People Who Commute 45+ Minutes vs. Hospitalization from Heart Attack
 ```
-### From the scatter plot above we can infere that there is a positive correlation with the number of people who commute over 45 minutes and number of heart attack related hospitalizations.
+### From the scatter plot above we can infer that there is a positive correlation with the number of people who commute over 45 minutes and number of heart attack related hospitalizations.
 ```{r}
 # 4.1
 # Calculate the ratio of heart attack hospitalizations by number of people who commute 45+ minutes for all Florida counties
@@ -252,6 +253,5 @@ elbow_room1 <- fl_base +
       theme_bw() +
       ditch_the_axes
 
-elbow_room1 
+elbow_room1 + scale_fill_gradient(trans = "log10") # I added the extra gradient for visibility
 ```
-
