@@ -6,6 +6,11 @@ output: html_notebook
 ```{r}
 # install libraries
 library(tidyverse)
+
+# Install libraries for mapping purposes
+library(tigris)
+library(leaflet)
+library(maps)
 ```
 ```{r}
 tot_pop_df <- read_csv("5Y2016_S0101.csv", n_max = 1)
@@ -169,11 +174,12 @@ hospRate_by_commRate
 ```
 
 ```{r}
-# Install libraries for mapping purposes
-library(tigris)
-library(leaflet)
+FL_counties <- counties("FL")
+
+ggplot(FL_counties) + 
+  geom_sf()
 ```
 
 ```{r}
-
+FL_counties
 ```
