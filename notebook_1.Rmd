@@ -173,13 +173,4 @@ hospRate_by_commRate
 342.4 / 6408
 ```
 
-```{r}
-FL_counties <- counties("FL")
 
-ggplot(FL_counties) + 
-  geom_sf()
-```
-
-```{r}
-FL_counties
-```
