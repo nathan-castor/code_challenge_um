@@ -175,19 +175,6 @@ hospRate_by_commRate
 
 
 ```{r}
-# FL_counties <- counties("FL")
-# 
-# ggplot(FL_counties) + 
-#   geom_sf()
-```
-
-```{r}
-# FL_counties
-```
-
-
-
-```{r}
 library(ggplot2)
 library(ggmap)
 library(maps)
