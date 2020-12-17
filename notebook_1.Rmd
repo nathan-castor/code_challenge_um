@@ -173,13 +173,98 @@ hospRate_by_commRate
 342.4 / 6408
 ```
 
-```{r}
-FL_counties <- counties("FL")
 
-ggplot(FL_counties) + 
-  geom_sf()
+```{r}
+# FL_counties <- counties("FL")
+# 
+# ggplot(FL_counties) + 
+#   geom_sf()
 ```
 
 ```{r}
-FL_counties
+# FL_counties
 ```
+
+
+
+```{r}
+library(ggplot2)
+library(ggmap)
+library(maps)
+library(mapdata)
+```
+
+```{r}
+states <- map_data("state")
+fl_df <- subset(states, region == "florida")
+counties <- map_data("county")
+fl_county <- subset(counties, region == "florida")
+```
+```{r}
+fl_base <- ggplot(data = fl_df, mapping = aes(x = long, y = lat, group = group)) + 
+  coord_fixed(1.3) + 
+  geom_polygon(color = "black", fill = "gray")
+
+fl_base + theme_nothing() + 
+  geom_polygon(data = fl_county, fill = NA, color = "white") +
+  geom_polygon(color = "black", fill = NA)  # get the state border back on top
+```
+```{r}
+fl_county <- fl_county %>% rename("County" = "subregion")
+head(fl_county)
+```
+
+```{r}
+#  Make all the County values lowercase to merge with fl_county df
+all_commRate_hospRate[["County"]] <- tolower(all_commRate_hospRate[["County"]])
+all_commRate_hospRate
+```
+
+
+```{r}
+# make all the county values lowercase in order to merge with all_commRate_hospRate df
+hospRate_by_commRate
+hospRate_by_commRate[["County"]] <- tolower(hospRate_by_commRate[["County"]])
+hospRate_by_commRate
+```
+
+
+```{r}
+# rename num_hsptlzd/num_commuters
+hospRate_by_commRate <- hospRate_by_commRate %>% rename("hsptlzd_by_commuters" = "num_hsptlzd/num_commuters")
+names(hospRate_by_commRate)
+```
+
+
+```{r}
+# merge hospRate_by_commRate to all_commRate_hospRate
+final_combined_data <- inner_join(hospRate_by_commRate, all_commRate_hospRate, by = "County")
+final_combined_data
+```
+
+
+```{r}
+# merge fl_county and final_combined_data dfs
+final_maps_data <- inner_join(fl_county, final_combined_data, by = "County")
+final_maps_data
+```
+
+```{r}
+ditch_the_axes <- theme(
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  panel.border = element_blank(),
+  panel.grid = element_blank(),
+  axis.title = element_blank()
+  )
+
+elbow_room1 <- fl_base + 
+      geom_polygon(data = final_maps_data, aes(fill = hsptlzd_by_commuters), color = "white") +
+      geom_polygon(color = "black", fill = NA) +
+      theme_bw() +
+      ditch_the_axes
+
+elbow_room1 
+```
+
