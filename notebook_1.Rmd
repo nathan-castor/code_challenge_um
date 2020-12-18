@@ -11,13 +11,19 @@ library(tidyverse)
 library(tigris)
 library(leaflet)
 library(maps)
+# library(ggplot2)
+library(ggmap)
+library(mapdata)
 ```
 ```{r}
+# Read the data from data.census.gov/
+# table S0101 2016 5yr estimate
 tot_pop_df <- read_csv("5Y2016_S0101.csv", n_max = 1)
 head(tot_pop_df)
 ```
 
 ```{r}
+# rename county fields to match those in data provided
 tot_pop_edited <- tot_pop_df %>%
   rename(
     "Miami-Dade" = "Miami-Dade County, Florida!!Total!!Estimate",
@@ -29,18 +35,21 @@ tot_pop_edited
 ```
 
 ```{r}
+# create vector of target counties for filtering
 tgt_counties <- c("Miami-Dade", "Broward", "Palm Beach", "Monroe")
+# create df of target counties
 tot_pop_tgts <- tot_pop_edited %>% select(tgt_counties)
 head(tot_pop_tgts)
 ```
 
 
 ```{r}
+# Create df of data provided on commuters who travel longer than 45 minutes
 commute_time <- read_csv("commuteTime45_2012_16.csv")
 commute_time
 ```
 ```{r}
-#
+# create function that filters a dataframe for our target counties
 filter_tgt_counties <- function(df) {
   return(df %>% filter(
     County %in% tgt_counties
@@ -50,20 +59,22 @@ filter_tgt_counties <- function(df) {
 
 
 ```{r}
-#
+# use filter_tgt_counties to create df for commuters in target counties
 commute_time_tgts <- filter_tgt_counties(commute_time)
 commute_time_tgts
 ```
 
 
 ```{r}
+# order the columns alphabetically in order to accurately calculate rates
 tot_pop_tgts <- tot_pop_tgts[, order(names(tot_pop_tgts))]
 tot_pop_tgts
 ```
 
 
 ```{r}
-# Function to Calculate percent values
+# Function to Calculate percent values df$Value over population
+# in target counties
 calc_percent <- function(df) {
   return(t(t(df[, "Value"]) / as.vector(unlist(tot_pop_tgts[1, ]))))
 }
@@ -71,29 +82,34 @@ calc_percent <- function(df) {
 
 
 ```{r}
-#
+# df of commuters over population
+# values are in alphabetical order
 perc_commuters <- calc_percent(commute_time_tgts)
 perc_commuters
 ```
 ```{r}
-# Sanity Check
+# Sanity Check using Broward county
 132304 / 1863780
 ```
 ```{r}
+# adding county column for complete df of commuter/population rates
 commRate <- data.frame(County = tgt_counties, Rate = perc_commuters)
 commRate
 ```
 
 
 ```{r}
+# df of provided heart attack hospitalization data provided
 heart_attack <- read_csv("heartAttackER_2012_16.csv")
 heart_attack
 ```
 ```{r}
+# heart attack df filtered for target counties
 heart_attack_tgts <- filter_tgt_counties(heart_attack)
 heart_attack_tgts
 ```
 ```{r}
+# 2.4 get mean of heart attack data as it's by year over 5 years
 heart_attack_tgts_mean <- heart_attack_tgts %>%
   group_by(County) %>%
   summarise(mean(Value))
@@ -101,7 +117,7 @@ heart_attack_tgts_mean <- heart_attack_tgts %>%
 heart_attack_tgts_mean
 ```
 ```{r}
-#
+# rename mean(Value) to match other dfs for consistency
 heart_attack_tgts_mean <- heart_attack_tgts_mean %>%
   rename(
     "Value" = "mean(Value)"
@@ -110,15 +126,19 @@ names(heart_attack_tgts_mean)
 ```
 
 ```{r}
+# df of heart attack hospitalization over population by county
 perc_heart_attacks <- calc_percent(heart_attack_tgts_mean)
 perc_heart_attacks
 ```
 
 ```{r}
+# adding county for complete df of heart attack hospitalization rates
 hospRate <- data.frame(County = tgt_counties, Rate = perc_heart_attacks)
 hospRate
 ```
 ```{r}
+# 2.5 complete rate data df hospitalization and commuter rates
+# for reporting task 2.5
 rate_data <- data.frame(County = hospRate[, 1], hospRate = hospRate[, 2], commRate = commRate[, 2])
 rate_data
 ```
@@ -129,6 +149,7 @@ all_heart_attack_mean_5yr <- heart_attack %>%
   group_by(County) %>%
   summarise(mean(Value))
 
+# rename calculated column for consistency
 all_heart_attack_mean_5yr <- all_heart_attack_mean_5yr %>%
   rename(
     "Value" = "mean(Value)"
@@ -137,8 +158,10 @@ all_heart_attack_mean_5yr
 ```
 
 ```{r}
+# combine all FL county heart attack hosp and commuter data
 all_commRate_hospRate <- merge(all_heart_attack_mean_5yr, commute_time, by = "County")
 
+# rename columns for clarity
 all_commRate_hospRate <- all_commRate_hospRate %>%
   rename(
     "num_hsptlzd" = "Value.x",
@@ -150,9 +173,12 @@ all_commRate_hospRate
 
 
 ```{r}
+# 3.1 Create a scatter plot to examine the relationship between
+# the number of people who commute 45+ minutes
+# and heart attack hospitalizations for all florida counties.
+
 ggplot(all_commRate_hospRate, aes(x = num_commuters, y = num_hsptlzd)) +
   geom_point()
-# theme(legend.position = "bottom")
 ```
 
 ```{r}
@@ -161,7 +187,8 @@ ggplot(all_commRate_hospRate, aes(x = num_commuters, y = num_hsptlzd)) +
 ### From the scatter plot above we can infer that there is a positive correlation with the number of people who commute over 45 minutes and number of heart attack related hospitalizations.
 ```{r}
 # 4.1
-# Calculate the ratio of heart attack hospitalizations by number of people who commute 45+ minutes for all Florida counties
+# Calculate the ratio of heart attack hospitalizations by number of people
+# who commute 45+ minutes for all Florida counties
 hospRate_by_commRate <- all_commRate_hospRate %>%
   group_by(County) %>%
   summarise(num_hsptlzd / num_commuters)
@@ -176,28 +203,20 @@ hospRate_by_commRate
 
 
 ```{r}
-library(ggplot2)
-library(ggmap)
-library(maps)
-library(mapdata)
-```
-
-```{r}
+# Get required map data for mapping above rates onto county
 states <- map_data("state")
 fl_df <- subset(states, region == "florida")
 counties <- map_data("county")
 fl_county <- subset(counties, region == "florida")
 ```
 ```{r}
-fl_base <- ggplot(data = fl_df, mapping = aes(x = long, y = lat, group = group)) + 
-  coord_fixed(1.3) + 
+# set up base map to build off of
+fl_base <- ggplot(data = fl_df, mapping = aes(x = long, y = lat, group = group)) +
+  coord_fixed(1.3) +
   geom_polygon(color = "black", fill = "gray")
-
-fl_base + theme_nothing() + 
-  geom_polygon(data = fl_county, fill = NA, color = "white") +
-  geom_polygon(color = "black", fill = NA)  # get the state border back on top
 ```
 ```{r}
+# rename map data for merging my dfs into county mapping
 fl_county <- fl_county %>% rename("County" = "subregion")
 head(fl_county)
 ```
@@ -218,7 +237,7 @@ hospRate_by_commRate
 
 
 ```{r}
-# rename num_hsptlzd/num_commuters
+# rename num_hsptlzd/num_commuters to avoid special characters
 hospRate_by_commRate <- hospRate_by_commRate %>% rename("hsptlzd_by_commuters" = "num_hsptlzd/num_commuters")
 names(hospRate_by_commRate)
 ```
@@ -238,6 +257,7 @@ final_maps_data
 ```
 
 ```{r}
+# create styling for showing nice county rate data in map
 ditch_the_axes <- theme(
   axis.text = element_blank(),
   axis.line = element_blank(),
@@ -245,13 +265,15 @@ ditch_the_axes <- theme(
   panel.border = element_blank(),
   panel.grid = element_blank(),
   axis.title = element_blank()
-  )
+)
 
-elbow_room1 <- fl_base + 
-      geom_polygon(data = final_maps_data, aes(fill = hsptlzd_by_commuters), color = "white") +
-      geom_polygon(color = "black", fill = NA) +
-      theme_bw() +
-      ditch_the_axes
+# create map from base map data to show rates
+elbow_room1 <- fl_base +
+  geom_polygon(data = final_maps_data, aes(fill = hsptlzd_by_commuters), color = "white") +
+  geom_polygon(color = "black", fill = NA) +
+  theme_bw() +
+  ditch_the_axes
 
+# display map
 elbow_room1 + scale_fill_gradient(trans = "log10") # I added the extra gradient for visibility
 ```
